@@ -30,15 +30,15 @@ end
           @directory = @storage.connection.directories.get(CARRIERWAVE_DIRECTORY) || @storage.connection.directories.create(:key => CARRIERWAVE_DIRECTORY, :public => true)
         end
 
-        describe '#cache_stored_file!' do
-          it "should cache_stored_file! after store!" do
-            uploader = @uploader.new
-            uploader.store!(@file)
-            uploader.cache_stored_file!.should_not raise_error
-          end
-        end
+        #describe '#cache_stored_file!' do
+          #it "should not fail" do
+            #uploader = @uploader.new
+            #uploader.store!(@file)
+            #uploader.cache_stored_file!.should_not raise_error
+          #end
+        #end
 
-        describe '#store!' do
+       describe '#store!' do
           before do
             @uploader.stub!(:store_path).and_return('uploads/test.jpg')
             @fog_file = @storage.store!(@file)
