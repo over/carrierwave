@@ -30,13 +30,13 @@ end
           @directory = @storage.connection.directories.get(CARRIERWAVE_DIRECTORY) || @storage.connection.directories.create(:key => CARRIERWAVE_DIRECTORY, :public => true)
         end
 
-        #describe '#cache_stored_file!' do
-          #it "should not fail" do
-            #uploader = @uploader.new
-            #uploader.store!(@file)
-            #uploader.cache_stored_file!.should_not raise_error
-          #end
-        #end
+        describe '#cache_stored_file!' do
+          it "should not fail" do
+            uploader = @uploader.new
+            uploader.store!(@file)
+            uploader.cache_stored_file!
+          end
+        end
 
        describe '#store!' do
           before do
