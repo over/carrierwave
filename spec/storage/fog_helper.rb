@@ -30,13 +30,15 @@ end
           @directory = @storage.connection.directories.get(CARRIERWAVE_DIRECTORY) || @storage.connection.directories.create(:key => CARRIERWAVE_DIRECTORY, :public => true)
         end
 
-        #describe '#cache_stored_file!' do
-          #it "should not fail" do
-            #uploader = @uploader.new
-            #uploader.store!(@file)
+        describe '#cache_stored_file!' do
+          it "should not fail" do
+            uploader = @uploader.new
+            uploader.store!(@file)
+            uploader.cache_stored_file!
+            @file.size.should_not be_nil
             #uploader.cache_stored_file!.should_not raise_error
-          #end
-        #end
+          end
+        end
 
        describe '#store!' do
           before do
@@ -56,7 +58,7 @@ end
             @fog_file.content_type.should == 'image/jpeg'
             @directory.files.get('uploads/test.jpg').content_type.should == 'image/jpeg'
           end
-
+          
           context "without fog_host" do
             it "should have a public_url" do
               unless fog_credentials[:provider] == 'Local'
