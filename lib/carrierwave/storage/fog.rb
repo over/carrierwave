@@ -214,7 +214,8 @@ module CarrierWave
         #
         # [String] contents of file
         def read
-          file.body
+          puts "Net/Http get #{@uploader.url}"
+          @file_body ||= Net::HTTP.get(URI.parse(@uploader.url))
         end
 
         ##
@@ -253,6 +254,7 @@ module CarrierWave
             :key          => path,
             :public       => @uploader.fog_public
           }.merge(@uploader.fog_attributes))
+          @file_body = nil
           fog_file.close if fog_file && !fog_file.closed?
           true
         end
