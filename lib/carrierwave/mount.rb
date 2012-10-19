@@ -170,6 +170,7 @@ module CarrierWave
         end
 
         def #{column}=(new_file)
+          _mounter(:#{column}).uploader.touch_random_file_token
           _mounter(:#{column}).cache(new_file)
         end
 
