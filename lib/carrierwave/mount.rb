@@ -170,7 +170,7 @@ module CarrierWave
         end
 
         def #{column}=(new_file)
-          _mounter(:#{column}).uploader.touch_random_file_token
+          _mounter(:#{column}).touch_random_file_token
           _mounter(:#{column}).cache(new_file)
         end
 
@@ -310,6 +310,10 @@ module CarrierWave
           @uploader.retrieve_from_store!(identifier)
         end
         return @uploader
+      end
+
+      def touch_random_file_token
+        uploader.touch_random_file_token!
       end
 
       def cache(new_file)
